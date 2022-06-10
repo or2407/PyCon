@@ -1,0 +1,21 @@
+MODULE main
+
+VAR
+	nodes : {q1, q3, q6, q2, q5, q4};
+
+
+ASSIGN			
+
+	init(nodes) := q1;
+    next(nodes) := case
+        nodes = q1 : {q3};
+        nodes = q3 : {q1,q6};
+        nodes = q6 : {q2};
+        nodes = q2 : {q4};
+        nodes = q5 : {q2};
+        nodes = q4 : {q2};
+        TRUE : nodes;
+
+        esac;
+
+LTLSPEC        (G F(nodes = q4))
